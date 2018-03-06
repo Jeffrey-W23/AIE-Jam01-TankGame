@@ -70,9 +70,34 @@ public class SpawnController : MonoBehaviour
             // If a valid enemy
             if (gEnemy)
             {
+
+
+
+
+
+
+
+
+
+                Vector2 randPos = Random.insideUnitCircle * 500.0f;
+                gEnemy.transform.position += new Vector3(randPos.x, 0, randPos.y);
+
+                
+
+
+
                 // put enemy at a random position in the map
-                Vector2 pos = Random.insideUnitCircle.normalized * 500.0f;
-                gEnemy.transform.position = pos;
+                //Vector2 pos = Random.insideUnitCircle.normalized * 500.0f;
+                //gEnemy.transform.position = pos;
+
+
+
+
+
+
+
+
+
             }
         }
     }

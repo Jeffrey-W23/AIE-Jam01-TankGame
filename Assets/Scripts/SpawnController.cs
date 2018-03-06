@@ -18,6 +18,9 @@ public class SpawnController : MonoBehaviour
 
     // public float for spawn rate
     public float m_fSpawnRate;
+
+    // public float for the spawn circle radius
+    public float m_fSpawnRadius;
     //--------------------------------------------------------------------------------------
 
     // PRVIATE VALUES //
@@ -79,15 +82,16 @@ public class SpawnController : MonoBehaviour
 
 
 
-                Vector2 randPos = Random.insideUnitCircle * 500.0f;
-                gEnemy.transform.position += new Vector3(randPos.x, 0, randPos.y);
+                Vector2 randPos = Random.insideUnitCircle * m_fSpawnRadius;
+                Debug.Log(randPos.ToString());
+                gEnemy.transform.position = new Vector3(randPos.x, 0, randPos.y);
 
-                
+
 
 
 
                 // put enemy at a random position in the map
-                //Vector2 pos = Random.insideUnitCircle.normalized * 500.0f;
+                //Vector2 pos = Random.insideUnitCircle.normalized * m_fSpawnRadius;
                 //gEnemy.transform.position = pos;
 
 

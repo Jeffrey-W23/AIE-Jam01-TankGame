@@ -1,4 +1,13 @@
-﻿// Using, etc
+﻿//--------------------------------------------------------------------------------------
+// Purpose: Spawn Enemies.
+//
+// Description: This class is used for spawning and holding the enemy agents pool.
+// Also used for any settings or changes that need to be made to Enemies in the scene.
+//
+// Author: Thomas Wiltshire.
+//--------------------------------------------------------------------------------------
+
+// Using, etc
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +30,12 @@ public class SpawnController : MonoBehaviour
 
     // public float for the spawn circle radius
     public float m_fSpawnRadius;
+
+    // public float for the amount of time between difficulty increases.
+    public float m_fDifficultyTime;
+
+    // public int for the ammount to increase the bool by each difficulty tick
+    public int m_nPoolIncreaseAmmount;
     //--------------------------------------------------------------------------------------
 
     // PRVIATE VALUES //
@@ -30,6 +45,9 @@ public class SpawnController : MonoBehaviour
 
     // prviate float for the spawn timer
     private float m_fSpawnTimer;
+
+    // private float value for the timer of the difficulty increase.
+    private float m_fDifficultyTimer;
     //--------------------------------------------------------------------------------------
 
     //--------------------------------------------------------------------------------------
@@ -49,8 +67,9 @@ public class SpawnController : MonoBehaviour
             m_agEnemyList.Add(tmp);
         }
 
-        // Set default value for timer
+        // Set default value for the timers
         m_fSpawnTimer = 0.0f;
+        m_fDifficultyTimer = m_fDifficultyTime; ;
     }
 
     //--------------------------------------------------------------------------------------
@@ -79,6 +98,9 @@ public class SpawnController : MonoBehaviour
                 gEnemy.transform.position = new Vector3(randPos.x, 0, randPos.y);
             }
         }
+
+        // Increase the difficulty.
+        IncreaseDifficulty();
     }
 
     //--------------------------------------------------------------------------------------
@@ -129,7 +151,8 @@ public class SpawnController : MonoBehaviour
         m_nPoolSize = nSize;
 
         // Add new enemy to the list
-        while (m_nPoolSize < m_agEnemyList.Count) AddNewEnemy();
+        while (m_nPoolSize > m_agEnemyList.Count)
+            AddNewEnemy();
     }
 
     //--------------------------------------------------------------------------------------
@@ -161,6 +184,28 @@ public class SpawnController : MonoBehaviour
         {
             // set damage
             m_agEnemyList[i].GetComponent<Enemy>().SetHealth(nDamage);
+        }
+    }
+
+    //--------------------------------------------------------------------------------------
+    // IncreaseDifficulty: Increase the difficulty over time by increasing spawn values.
+    //--------------------------------------------------------------------------------------
+    void IncreaseDifficulty()
+    {
+        // start the timer for the difficulty increase
+        m_fDifficultyTimer -= Time.deltaTime;
+
+        // if the timer is less than 0
+        if (m_fDifficultyTimer < 0)
+        {
+            // new int value to hold what the newly increased pool size will be
+            int nSetPool = m_nPoolSize += m_nPoolIncreaseAmmount;
+
+            // Set the new pool size
+            SetPoolSize(nSetPool);
+
+            // reset the timer
+            m_fDifficultyTimer = m_fDifficultyTime;
         }
     }
 }

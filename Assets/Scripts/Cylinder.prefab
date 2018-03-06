@@ -99,7 +99,7 @@ MonoBehaviour:
   m_nMaxHealth: 10
   m_nDamage: 10
   m_fSpeed: 2
-  m_fHoverHeight: 5
+  m_fHoverHeight: 0
 --- !u!136 &136757299811957010
 CapsuleCollider:
   m_ObjectHideFlags: 1

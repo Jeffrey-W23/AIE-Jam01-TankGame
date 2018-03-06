@@ -1,4 +1,12 @@
-﻿// using, etc
+﻿//--------------------------------------------------------------------------------------
+// Purpose: Enemy class.
+//
+// Description: The main class for the indivual enemy units.
+//
+// Author: Thomas Wiltshire.
+//--------------------------------------------------------------------------------------
+
+// using, etc
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
@@ -22,6 +30,9 @@ public class Enemy : MonoBehaviour
 
     // public hover height for enemy
     public float m_fHoverHeight;
+
+    // public int for the score of what a enemy is worth.
+    public int m_nScoreValue;
     //--------------------------------------------------------------------------------------
 
     // PRIVATE VALUES //
@@ -160,6 +171,7 @@ public class Enemy : MonoBehaviour
 
             // damage the player
             //m_gPlayer.mechHealth =- m_nDamage;                                                // UNCOMMENT ONCE MERGED
+            //m_gPlayer.Score =- m_nScoreValue;                                                 // UNCOMMENT ONCE MERGED
         }
 
         // if the collison is with the player.
@@ -169,7 +181,8 @@ public class Enemy : MonoBehaviour
             GameObject gBullet = GameObject.FindGameObjectWithTag("Bullet");
 
             // set health of the enemy by the bullet damage.
-            //m_nHealth =-gBullet.Damage;                                                       // UNCOMMENT ONCE MERGED
+            //m_nHealth =- gBullet.Damage;                                                       // UNCOMMENT ONCE MERGED
+            //m_gPlayer.Score += m_nScoreValue;                                                  // UNCOMMENT ONCE MERGED
         }
     }
 }
